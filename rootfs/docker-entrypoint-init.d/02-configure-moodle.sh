@@ -31,7 +31,7 @@ if [ ! -f /var/www/html/config.php ]; then
         --dbpass=$DB_PASS \
         --dbport=$DB_PORT \
         --prefix=$DB_PREFIX \
-        --fullname=Dockerized_Moodle \
+        --fullname=$MOODLE_SITENAME \
         --shortname=moodle \
         --adminuser=$MOODLE_USERNAME \
         --adminpass=$MOODLE_PASSWORD \
@@ -40,10 +40,16 @@ if [ ! -f /var/www/html/config.php ]; then
         --agree-license \
         --skip-database
 
+    # Enable debugging
+    if [ "$DEV_MODE" = 'true' ]; then
+        # Enable developer debugging and disable js caching for quick updates
+        sed -i '/require_once/i $CFG->cachejs = false;' /var/www/html/config.php
+        sed -i '/require_once/i $CFG->debug = DEBUG_DEVELOPER;' /var/www/html/config.php
+    fi
+
     if [ "$SSLPROXY" = 'true' ]; then
         sed -i '/require_once/i $CFG->sslproxy=true;' /var/www/html/config.php
     fi
-
 fi
 
 # Check if the database is already installed
