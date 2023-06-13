@@ -16,6 +16,7 @@ services:
     build: .
     restart: unless-stopped
     environment:
+      DEV_MODE: "true"
       LANG: "en_US.UTF-8"
       LANGUAGE: "en_US:en"
       SITE_URL: "http://localhost"

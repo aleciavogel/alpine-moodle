@@ -64,7 +64,7 @@ if [ ! -f /var/www/html/config.php ]; then
         --non-interactive \
         --agree-license \
         --skip-database \
-        --allow-unstable
+        --allow-unstable 
 
     # Set extra database settings
     if [ -n "$DB_FETCHBUFFERSIZE" ]; then
@@ -87,6 +87,13 @@ if [ ! -f /var/www/html/config.php ]; then
 
     # Avoid allowing executable paths to be set via the Admin GUI
     echo "\$CFG->preventexecpath = true;" >> /var/www/html/config.php
+
+    # Enable debugging
+    if [ "$DEV_MODE" = 'true' ]; then
+        # Avoid allowing executable paths to be set via the Admin GUI
+        echo "\$CFG->cachejs = false;" >> /var/www/html/config.php
+        echo "\$CFG->debug = DEBUG_DEVELOPER;" >> /var/www/html/config.php
+    fi
 
 fi
 
