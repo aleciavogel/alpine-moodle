@@ -61,7 +61,7 @@ if php -d max_input_vars=1000 /var/www/html/admin/cli/isinstalled.php ; then
         --adminuser=$MOODLE_USERNAME \
         --adminpass=$MOODLE_PASSWORD \
         --adminemail=$MOODLE_EMAIL \
-        --fullname=$MOODLE_SITENAME \
+        --fullname=Dockerized_Moodle \
         --shortname=moodle \
         --agree-license
 
