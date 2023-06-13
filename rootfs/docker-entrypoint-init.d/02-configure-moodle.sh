@@ -90,7 +90,7 @@ if [ ! -f /var/www/html/config.php ]; then
 
     # Enable debugging
     if [ "$DEV_MODE" = 'true' ]; then
-        # Avoid allowing executable paths to be set via the Admin GUI
+        # Enable developer tools and disable js caching for quick updates
         echo "\$CFG->cachejs = false;" >> /var/www/html/config.php
         echo "\$CFG->debug = DEBUG_DEVELOPER;" >> /var/www/html/config.php
     fi
